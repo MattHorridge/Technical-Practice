@@ -31,18 +31,12 @@ public class Bubblesort{
 		for (int i : ar){
 			System.out.print(i);
 		}
-
-
 	}
 
 
 
 
 	private static void bubble(int[] ar){
-
-		//A boolean to check whether any variable swap has occured during the sort
-
-
 
 		for (int j = 0; j < ar.length; j++){
 
@@ -60,29 +54,16 @@ public class Bubblesort{
 					//		System.out.println();		
 					//swapcheck = true;
 				}
-
-				
-
 			}
-
-
 		}
-
-		
-
-
-
 	}
 
-	//swap method 
 
+	//swap method for readability
 	private static void swap(int[] array, int a, int b){
-
-		//Temporary for A
 		int temp = array[a];
 		array[a] = array[b];
 		array[b] = temp;
-
 	}
 
 
