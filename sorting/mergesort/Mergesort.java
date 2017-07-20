@@ -1,4 +1,7 @@
-public class Mergesort{
+public class mergesort{
+
+
+	//merge sort take 3;
 
 
 	//Merge Sort Practice
@@ -36,30 +39,19 @@ public class Mergesort{
 	//	{2,3,4,5}
 
 
-	//merge(array, l, m, r) function:
-		//Assume array[l..m] and array[m+1...r] are sorted and merge together
-
-
 
 	public static void main(String[] args){
 
-		int[] test = {5,4,3,2,1};
+		int[] test = {100,5,2003,4,16,1, 209};
 
-
-		//System.out.println(test.length/2);
-		
-		for(int i : test){
+		for (int i : test){
 			System.out.println(i);
 		}
 
+		mergeSort(test);
 
-		
-			System.out.println("");
-		
 
-		mergesort(test,0,3);
-
-		for(int i : test){
+		for (int i : test){
 			System.out.println(i);
 		}
 
@@ -67,77 +59,85 @@ public class Mergesort{
 
 
 
+	public static void merge(int[] array, int[] left, int[] right){
 
 
+		int leftsize = left.length;
+		int rightsize = right.length;
 
+	//	System.out.println(leftsize);
+	//	System.out.println(rightsize);
+		int leftCounter = 0, rightCounter = 0, k = 0;
 
-	private static void mergesort(int[] array, int low, int high){
+		while(leftCounter < leftsize && rightCounter < rightsize){
 
-		//base case: an array of size 1 where low == high
-		//otherwise array not sorted
-
-		if (high > low)
-			{
-				int middle = (low+high)/2;
-				mergesort(array, low, middle);
-				mergesort(array, middle+1, high);
-
-				merge(array, low, high);
-			}
-
-
-
-	}
-
-
-
-	private static void merge(int[] array, int low, int high){
-
-		int[] helperarray = new int[array.length];
-		int leftCounter = low;
-		int middle = (low+high)/2;
-		int rightCounter = middle+1;
-		int k = low; //Counter for adding things to helper array
-
-
-		for(int i = low; i <= high; i++){
-			helperarray[i] = array[i];
-		}
-
-
-		while(leftCounter <= middle && rightCounter <= high){
-
-			if(helperarray[leftCounter] <= helperarray[rightCounter]){
-				array[k] = helperarray[leftCounter];
+			if(left[leftCounter] <= right[rightCounter]){
+				array[k] = left[leftCounter];
 				leftCounter++;
+				k++;
 			}
-			else{
-				array[k] = helperarray[rightCounter];
+			else
+			{
+				array[k] = right[rightCounter];
 				rightCounter++;
+				k++;
 			}
+		}
+
+		while(leftCounter < leftsize){
+			array[k] = left[leftCounter];
+			leftCounter++;
 			k++;
 		}
 
 
-		if(leftCounter > middle){
-			while(rightCounter <= high){
-				array[k] = helperarray[rightCounter];
-				k++;
-				rightCounter++;
-			}
-		}
-		
-		else{
-			while(leftCounter <= middle){
-				array[k] = helperarray[k];
-				k++;
-				leftCounter++;
-			}
+		while(rightCounter < rightsize){
+			array[k] = right[rightCounter];
+			rightCounter++;
+			k++;
 		}
 
+		
 
 
 	}
+
+
+	public static void mergeSort(int[] array){
+
+
+		if (array.length < 2)
+			return;
+
+		int[] left, right;
+
+		int middle = (array.length)/2;
+
+		//make left and right arrays
+		left = new int[middle];
+		right = new int[array.length - middle];
+
+		
+
+		//fill left and right arrays with elements from orignal
+		for(int i = 0; i < middle; i++){
+				left[i] = array[i];
+				//System.out.println(left[i]);
+		}
+
+		for(int j = middle; j < array.length; j++){
+			right[j-middle] = array[j];	
+			//System.out.println(right[j-middle]);
+		}
+
+
+		mergeSort(left);
+		mergeSort(right);
+		merge(array, left, right);
+
+
+	}
+
 
 
 
